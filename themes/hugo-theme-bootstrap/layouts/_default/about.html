@@ -1,0 +1,38 @@
+{{ define "content" }}
+<main role="main" class="container{{ if default false .Site.Params.fullWidth }}-fluid{{ end }}">
+    <div class="row content">
+        <div class="col-lg-9">
+            <div class="container">
+                <article class="row card component mb-4 post">
+                    <div class="card-header ">
+                      <h1 class="card-title post-title">{{ partial "helpers/title" . }}</h1>
+                    </div>
+                    <div class="card-body">
+                      {{- partial "post/meta" . -}}
+                      {{- partial "hooks/content-begin" . -}}
+                      {{- partial "post/share" . -}}
+                      <div class="post-content mb-3">
+                        {{- .Content -}}
+                      </div>
+                      {{- partial "post/reward" . -}}
+                      {{- partial "hooks/content-end" . -}}
+                    </div>
+                    {{- if ne .Title "关于"}}
+                    <div class="card-footer">
+                      {{- partial "post/nav" . -}}
+                    </div>
+                    {{- end -}}
+                  </article>
+            </div>
+        </div>
+        <aside class="col-lg-3 sidebar d-flex">
+            <div class="container d-flex flex-column">
+                {{- partial "sidebar/profile" . -}}
+                {{- partial "post/toc" . -}}
+                {{- partial "sidebar/featured-posts" . -}}
+                {{- partial "sidebar/recent-posts" . -}}
+            </div>
+        </aside>
+    </div>
+</main>
+{{- end -}}

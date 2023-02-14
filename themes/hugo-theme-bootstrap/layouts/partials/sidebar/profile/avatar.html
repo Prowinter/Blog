@@ -1,0 +1,3 @@
+{{- with .Site.Author -}}
+<img class="profile-avatar rounded-circle" src={{.avatar | absURL}} alt={{.name}} loading="lazy">
+{{- end -}}

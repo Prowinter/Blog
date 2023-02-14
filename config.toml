@@ -1,0 +1,8 @@
+baseURL = 'http://prowinter.cn/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+theme = "hugo-theme-bootstrap"
+
+[markup]
+  [markup.highlight]
+    style = 'monokailight'

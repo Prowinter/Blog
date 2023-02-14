@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Auto Update Blog To QiNiu
+run-name: Auto Update
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  #push:
+  #  branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Complie static blog
+        run: |
+          wget https://github.com/gohugoio/hugo/releases/download/v0.110.0/hugo_0.110.0_linux-amd64.tar.gz
+          tar -xzvf hugo_0.110.0_linux-amd64.tar.gz
+          chmod +x ./hugo
+          ./hugo 
+          
+      - name: Download qshell from @qiniu/qshell
+        env:
+          QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
+          QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
+          QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
+          USER: prowinter
+          SRC: public/
+        run: |
+          wget https://github.com/qiniu/qshell/releases/download/v2.9.2/qshell-v2.9.2-linux-amd64.tar.gz
+          tar -xzvf ./qshell-v2.9.2-linux-amd64.tar.gz
+          chmod +x ./qshell
+          ./qshell account ${{ env.QINIU_ACCESS_KEY }} ${{ env.QINIU_SECRET_KEY }} ${{ env.USER }}
+          ./qshell qupload2 --src-dir=${{ env.SRC }} --bucket=${{ env.QINIU_BUCKET }} --overwrite=true
+          

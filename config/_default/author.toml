@@ -1,0 +1,21 @@
+
+name = "Prowinter"
+avatar = "images/avatar.png"
+bio = "道阻且长."
+company = ''
+# company = '<a href="https://example.com" target="_blank" rel="noopener noreferrer">Company</a>'
+location = "湖南"
+# alternatives:
+# location = "<a href='https://www.openstreetmap.org/search?query=Earth'>Earth</a>"
+# location = "<a href='https://www.google.com/maps/search/Earth'>Earth</a>"
+# about = "https://domain.tld" # The external about page. The internal about page will be used if not set.
+
+[params]
+  #layout = "compact"
+
+[social]
+  bilibili = "455519271"
+  email = "Anonymouskoalakoala@gmail.com"
+  github = "prowinter"
+  weibo = "1"
+  

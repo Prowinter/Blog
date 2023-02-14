@@ -1,0 +1,15 @@
+{{- $enable := and (default true .Params.toc) (default true .Site.Params.toc) -}}
+{{- $wordCount := default 280 .Site.Params.tocWordCount -}}
+{{- $toc := .TableOfContents -}}
+{{- $valid := and $toc (and (ne $toc "<nav id=\"TableOfContents\"></nav>") (gt .WordCount $wordCount)) -}}
+{{- if and $enable $valid -}}
+<div class="assist-toc" id="assist-toc" style="position: relative; top: -70px;"></div>
+<div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    {{ $toc }}
+  </div>
+</div>
+{{- end -}}
